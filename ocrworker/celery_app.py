@@ -14,6 +14,17 @@ app = Celery(
     include=["ocrworker.tasks"],
 )
 
+app.conf.update(
+    broker_connection_retry_on_startup=True,
+    task_serializer='json',
+    accept_content=['json'],
+    result_serializer='json',
+    task_default_queue='ocr',  # Set default queue
+    task_routes={
+        'worker_ocr_document': {'queue': 'ocr'},
+        'ocrworker.tasks.*': {'queue': 'ocr'}
+    }
+)
 app.conf.update(broker_connection_retry_on_startup=True)
 
 app.autodiscover_tasks()

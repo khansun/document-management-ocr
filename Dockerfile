@@ -22,8 +22,6 @@ COPY ocrworker/ /app/ocrworker/
 RUN pip install --upgrade poetry
 RUN poetry install -E pg -v
 
-COPY docker/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+VOLUME ["/app/logs"]
 
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["worker"]
+CMD ["poetry", "run", "celery", "-A", "ocrworker.celery_app", "worker", "-E", "--loglevel=DEBUG"]
