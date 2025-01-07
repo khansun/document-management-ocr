@@ -13,9 +13,12 @@ handlers:
     formatter: verbose
   file:
     level: DEBUG  
-    class: logging.FileHandler
+    class: logging.handlers.TimedRotatingFileHandler
     formatter: verbose
-    filename: /app/logs/idxworker.log
+    filename: /app/logs/ocrworker.log
+    when: midnight
+    interval: 1
+    backupCount: 60
 
 loggers:
   root:

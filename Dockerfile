@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY poetry.lock pyproject.toml README.md LICENSE /app/
 COPY ocrworker/ /app/ocrworker/
+COPY logging.yaml /etc/ocrworker/logging.yaml
 
 RUN pip install --upgrade poetry
 RUN poetry install -E pg -v

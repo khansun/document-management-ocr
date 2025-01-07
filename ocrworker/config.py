@@ -6,7 +6,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     papermerge__redis__url: str | None = None
-    papermerge__main__logging_cfg: Path | None = None
+    papermerge__main__logging_cfg: Path | None = Path("/etc/ocrworker/logging.yaml")
     papermerge__main__media_root: Path = Path(".")
     papermerge__main__prefix: str = ""
     papermerge__database__url: str = "sqlite:////db/db.sqlite3"
